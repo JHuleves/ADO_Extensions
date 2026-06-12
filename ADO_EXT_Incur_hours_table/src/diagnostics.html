@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Time Tracking Diagnostics</title>
+    <script src="VSS.SDK.min.js"></script>
+    <style>
+        body { font-family: "Segoe UI", sans-serif; padding: 20px; }
+        .status-box { padding: 15px; border: 1px solid #ccc; margin-top: 10px; border-radius: 4px; }
+        .ok { border-color: #107c10; background-color: #f6fff6; color: #107c10; }
+        .error { border-color: #a80000; background-color: #fff4f4; color: #a80000; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Time Tracking Extension Diagnostics</h1>
+    <p>This tool verifies if your project and work items are correctly configured for the time tracking extension.</p>
+    
+    <div id="status-container">Checking configuration...</div>
+
+    <script>
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformScripts: true,
+            usePlatformStyles: true
+        });
+
+        VSS.require(["diagnostics"], function (diag) {
+            VSS.notifyLoadSucceeded();
+        });
+    </script>
+</body>
+</html>

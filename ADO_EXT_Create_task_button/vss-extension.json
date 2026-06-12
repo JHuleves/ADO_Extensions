@@ -1,0 +1,219 @@
+{
+    "manifestVersion": 1,
+    "id": "Action-Button-Control",
+    "version": "1.4.4",
+    "name": "Action Button Control",
+    "scopes": [
+        "vso.work",
+        "vso.work_write",
+        "vso.identity",
+        "vso.graph",
+        "vso.project",
+        "vso.security_manage"
+    ],
+    "description": "Runs an Action",
+    "publisher": "JHuelves",
+    "icons": {
+        "default": "img/logo.png"
+    },
+    "targets": [{
+        "id": "Microsoft.VisualStudio.Services"
+    }],
+    "tags": [
+        "Work Item",
+        "Work Item control",
+        "Usability",
+        "Button",
+        "Aggrigator",
+        "Action"
+    ],
+    "content": {
+        "details": {
+            "path": "details.md"
+        },
+        "license": {
+            "path": "LICENSE.md"
+        },
+        "privacy": {
+            "path": "PRIVACY.md"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "uri": "https://github.com/avih75/TFS_Action_Button"
+    },
+    "links": {
+        "support": {
+            "uri": "https://github.com/avih75/TFS_Action_Button/issues"
+        },
+        "license": {
+            "uri": "https://github.com/avih75/TFS_Action_Button/blob/master/LICENSE.md"
+        },
+        "privacypolicy": {
+            "uri": "https://github.com/avih75/TFS_Action_Button/blob/master/PRIVACY.md"
+        },
+        "learn": {
+            "uri": "https://github.com/avih75/TFS_Action_Button/blob/master/README.md"
+        },
+        "repository": {
+            "uri": "https://github.com/avih75/TFS_Action_Button"
+        },
+        "issues": {
+            "uri": "https://github.com/avih75/TFS_Action_Button/issues"
+        }
+    },
+    "files": [{
+            "path": "img",
+            "addressable": true
+        },
+        {
+            "path": "scripts",
+            "addressable": true
+        },
+        {
+            "path": "styles",
+            "addressable": true
+        },
+        {
+            "path": "index.html",
+            "addressable": true
+        },
+        {
+            "path": "configActionButton.html",
+            "addressable": true
+        },
+        {
+            "path": "widgetActionButton.html",
+            "addressable": true
+        },
+        {
+            "path": "widgetConfiguration.html",
+            "addressable": true
+        }
+    ],
+    "categories": [
+        "Azure Boards"
+    ],
+    "contributions": [{
+            "id": "ActionButton",
+            "description": "Runs an action",
+            "type": "ms.vss-work-web.work-item-form-control",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "name": "Actions control",
+                "uri": "index.html",
+                "height": 200,
+                "inputs": [{
+                        "id": "ButtonsNames",
+                        "name": "Buttons names",
+                        "description": "This field will be what the button is named on your page, (can be more then one by using ,) .",
+                        "type": "TextArea",
+                        "properties": {
+                            "workItemFieldTypes": [
+                                "Integer",
+                                "Double",
+                                "String"
+                            ]
+                        },
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "Activity",
+                        "name": "Activity",
+                        "description": "Activity type (Analysis, Consulting, Development, etc.). Seperated by ,",
+                        "type": "TextArea",
+                        "properties": {
+                            "workItemFieldTypes": [
+                                "Integer",
+                                "Double",
+                                "String"
+                            ]
+                        },
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "Log",
+                        "name": "Log",
+                        "description": "Enable console logging for debugging.",
+                        "inputMode": "CheckBox",
+                        "validation": {
+                            "dataType": "Boolean"
+                        }
+                    },
+                    {
+                        "id": "BypassRules",
+                        "name": "Bypass Rules",
+                        "description": "Allows setting values on read-only fields (Requires specific permissions).",
+                        "inputMode": "CheckBox",
+                        "validation": {
+                            "dataType": "Boolean"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": "configureFunctions",
+            "type": "ms.vss-web.hub",
+            "description": "add commands to buttons",
+            "targets": [
+                "ms.vss-web.collection-admin-hub-group"
+            ],
+            "properties": {
+                "name": "Action Button",
+                "uri": "configActionButton.html",
+                "order": 99
+            }
+        },
+        {
+            "id": "ButtonsWidget",
+            "type": "ms.vss-dashboards-web.widget",
+            "targets": [
+                "ms.vss-dashboards-web.widget-catalog",
+                ".ActionButtonWidget.Configuration"
+            ],
+            "properties": {
+                "name": "Action Button Widget",
+                "description": "Add action button",
+                "catalogIconUrl": "img/CatalogIcon.png",
+                "previewImageUrl": "img/preview.png",
+                "uri": "widgetActionButton.html",
+                "isNameConfigurable": true,
+                "supportedSizes": [{
+                    "rowSpan": 1,
+                    "columnSpan": 1
+                }, {
+                    "rowSpan": 2,
+                    "columnSpan": 1
+                }, {
+                    "rowSpan": 1,
+                    "columnSpan": 2
+                }, {
+                    "rowSpan": 2,
+                    "columnSpan": 2
+                }],
+                "supportedScopes": ["project_team"]
+            }
+        },
+        {
+            "id": "ActionButtonWidget.Configuration",
+            "type": "ms.vss-dashboards-web.widget-configuration",
+            "targets": [
+                "ms.vss-dashboards-web.widget-configuration"
+            ],
+            "properties": {
+                "name": "ActionButtonWidget Configuration",
+                "description": "Configures ActionButtonWidget",
+                "uri": "widgetConfiguration.html"
+            }
+        }
+    ]
+}

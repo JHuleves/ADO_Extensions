@@ -1,0 +1,12 @@
+{
+  "name": "feature-url-concat",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Azure DevOps extension: concat URLs for Feature work items (JS only)",
+  "dependencies": {
+    "azure-devops-extension-sdk": "^4.1.0"
+  },
+  "scripts": {
+    "build": "echo 'No build step'"
+  }
+}

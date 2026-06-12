@@ -1,0 +1,52 @@
+{
+  "manifestVersion": 1,
+  "id": "feature-url-concat",
+  "publisher": "Jhuelves",
+  "version": "1.0.0",
+  "name": "Feature URL Concatenator",
+  "description": "Concatena Custom.StaticUrl + Custom.VariableURL en Custom.NavegableURL para Features.",
+  "public": false,
+  "categories": [
+    "Azure Boards"
+  ],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "icons": {
+    "default": "images/icon.png"
+  },
+  "scopes": [
+    "vso.work",
+    "vso.work_write"
+  ],
+  "files": [
+    {
+      "path": "src/observer.html",
+      "addressable": true
+    },
+    {
+      "path": "src/observer.js",
+      "addressable": true
+    },
+    {
+      "path": "scr/lib",
+      "addressable": true,
+      "packagePath": "lib"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "feature-url-concat-observer",
+      "type": "ms.vss-work-web.work-item-notifications",
+      "targets": [
+        "ms.vss-work-web.work-item-form"
+      ],
+      "properties": {
+        "name": "Feature URL Concat Observer",
+        "uri": "src/observer.html"
+      }
+    }
+  ]
+}
