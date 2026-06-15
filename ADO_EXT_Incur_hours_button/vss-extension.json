@@ -1,6 +1,6 @@
 {
     "manifestVersion": 1,
-    "id": "ado-time-sheet-entry",
+    "id": "IncurrHoursButton",
     "version": "2.6.0",
     "name": "Time Sheet Entry",
     "scopes": [
@@ -14,7 +14,7 @@
     "description": "Concatenates fields into a multi-line field",
     "publisher": "JHuelves",
     "icons": {
-        "default": "img/logo_TSE.png"
+        "default": "img/logo.png"
     },
     "targets": [{
         "id": "Microsoft.VisualStudio.Services"
