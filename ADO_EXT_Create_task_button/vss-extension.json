@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "create-task-button",
     "version": "1.0.0",
-    "name": "Create Task Button",
+    "name": "Create Task Button Control",
     "scopes": [
         "vso.work",
         "vso.work_write",
@@ -11,7 +11,7 @@
         "vso.project",
         "vso.security_manage"
     ],
-    "description": "Runs an Action to create SAP Tasks",
+    "description": "Runs an Action",
     "publisher": "JHuelves",
     "icons": {
         "default": "img/logo.png"
@@ -79,11 +79,11 @@
             "addressable": true
         },
         {
-            "path": "configActionButton.html",
+            "path": "configCreateTaskButton.html",
             "addressable": true
         },
         {
-            "path": "widgetActionButton.html",
+            "path": "widgetCreateTaskButton.html",
             "addressable": true
         },
         {
@@ -95,7 +95,7 @@
         "Azure Boards"
     ],
     "contributions": [{
-            "id": "ActionButton",
+            "id": "CreateTaskButton",
             "description": "Runs an action",
             "type": "ms.vss-work-web.work-item-form-control",
             "targets": [
@@ -168,8 +168,8 @@
                 "ms.vss-web.collection-admin-hub-group"
             ],
             "properties": {
-                "name": "Action Button",
-                "uri": "configActionButton.html",
+                "name": "Create Task Button",
+                "uri": "configCreateTaskButton.html",
                 "order": 99
             }
         },
@@ -178,14 +178,14 @@
             "type": "ms.vss-dashboards-web.widget",
             "targets": [
                 "ms.vss-dashboards-web.widget-catalog",
-                ".ActionButtonWidget.Configuration"
+                ".CreateTaskButtonWidget.Configuration"
             ],
             "properties": {
-                "name": "Action Button Widget",
+                "name": "Create Task Button Widget",
                 "description": "Add action button",
                 "catalogIconUrl": "img/CatalogIcon.png",
                 "previewImageUrl": "img/preview.png",
-                "uri": "widgetActionButton.html",
+                "uri": "widgetCreateTaskButton.html",
                 "isNameConfigurable": true,
                 "supportedSizes": [{
                     "rowSpan": 1,
@@ -204,14 +204,14 @@
             }
         },
         {
-            "id": "ActionButtonWidget.Configuration",
+            "id": "CreateTaskButtonWidget.Configuration",
             "type": "ms.vss-dashboards-web.widget-configuration",
             "targets": [
                 "ms.vss-dashboards-web.widget-configuration"
             ],
             "properties": {
-                "name": "ActionButtonWidget Configuration",
-                "description": "Configures ActionButtonWidget",
+                "name": "CreateTaskButtonWidget Configuration",
+                "description": "Configures CreateTaskButtonWidget",
                 "uri": "widgetConfiguration.html"
             }
         }

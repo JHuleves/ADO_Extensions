@@ -2,7 +2,7 @@ import { RetriveValueList, Function, StoreValueList } from "./StorageHelper";
 
 let commandList: Array<Function>;
 function InitP() {
-    let main = $("#main").append($("<h2 />").text("Action Button Configuration"));
+    let main = $("#main").append($("<h2 />").text("Create Task Button Configuration"));
     let label = $("<label />").text("Action Functions list");
     let listDiv = $("<div />").attr("id", "listDiv").append(label);
     main.append(listDiv);

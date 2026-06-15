@@ -6,9 +6,8 @@ export class WorkitemController {
     private view: View;
     constructor() {
         let config = VSS.getConfiguration();
-        let inputs = config.witInputs || {};                                          // IDictionaryStringTo<string>;
-        
-        // Fixed parameters
+        let inputs = config.witInputs || {};
+
         let actionsNames: string = "Create SAP Task";
         let targetType: string = "Task";
         let linkToWit: string = "Child";
@@ -20,8 +19,7 @@ export class WorkitemController {
         let targetFieldsList: string = "";
         let targetProject: string = ""; 
 
-        // Configurable parameters
-        let buttonsNames: string = inputs["ButtonsNames"] || "";                                      // list of button content
+        let buttonsNames: string = inputs["ButtonsNames"] || "";
         let logEnabled: boolean = inputs["Log"] ? true : false;
         let activityInput: string = inputs["Activity"] || "";
         let buyPass: boolean = inputs["BypassRules"] ? true : false;

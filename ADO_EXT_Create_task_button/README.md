@@ -46,7 +46,7 @@ In this example, we will add the control to the Agile "user story".
         Id: AviHadad.Action-Button
 
         Control contribution:
-            Id: AviHadad.Action-Button.ActionButton
+            Id: AviHadad.Action-Button.CreateTaskButton
             Description: Runs a code from the buttonAction.dll file.
             Inputs:
                 Id: DataTransfer
@@ -105,7 +105,7 @@ In this example, we will add the control to the Agile "user story".
         ...
             <Group Id="Planning">
             ...
-			  <ControlContribution Label="new" Id="AviHadad.Action-Button.ActionButton">
+			  <ControlContribution Label="new" Id="AviHadad.Action-Button.CreateTaskButton">
 				<Inputs>
 					<Input Id="DataTrasfer" Value="Buttons.Button1" />
    					<Input Id="TargetType"  Value="Buttons.TargetType" />

@@ -2,7 +2,7 @@ import WidgetHelpers = require("TFS/Dashboards/WidgetHelpers");
 
 let WidgetConfigurationContext: any;
 
-VSS.register("ActionButtonWidget.Configuration", function () {
+VSS.register("CreateTaskButtonWidget.Configuration", function () {
     let $addNewButton = $("#addNewButton");
     return {
         load: function (widgetSettings, widgetConfigurationContext) {

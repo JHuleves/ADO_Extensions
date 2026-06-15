@@ -19,7 +19,7 @@ Right now there is only one action, the 'convert work item', it copy the work it
 this can give you the option to add several button to your form.
 and give each button the functionality you need. (from the given list)
 
-## WorkItem - Action Button 
+## WorkItem - Create Task Button 
 
 ### Variablel
 * Buttons names         - List of button name (text) seperated by "," sign.
@@ -40,7 +40,7 @@ find your field and get the full refname.
 ![Hit Count Control](img/Screenshot_3.png)
 ![Hit Count Control](img/Screenshot_4.png)
 
-## Dashboard - Action Button
+## Dashboard - Create Task Button
 
 ### Variable
 

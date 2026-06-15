@@ -1,5 +1,5 @@
 {
-    "id": "CreateTaskButton",
+    "id": "Action-Button",
     "publisher": "JHuelves",
     "name": "Create Task Button Control",
     "public": true
