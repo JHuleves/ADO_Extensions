@@ -1,4 +1,4 @@
-import { Model } from "./modelll";
+import { Model } from "./model";
 import { View } from "./view";
 import { WorkItemFormService } from "TFS/WorkItemTracking/Services";
 
@@ -27,11 +27,7 @@ export class WorkitemController {
         let buyPass: boolean = inputs["BypassRules"] ? true : false;
 
         let model = new Model(actionsNames, buttonsNames, targetType, filedsToCopy,
-<<<<<<< HEAD
             targetProject, preTitel, linkToWit, fieldsValues, targetFieldsList, buyPass, includeLinks, includeAttachments, logEnabled, activityInput);
-=======
-            targetProject, preTitel, linkToWit, fieldsValues, targetFieldsList,buyPass,includeLinks,includeAttachments);
->>>>>>> f16e1e2df3720139b0b9fc9ecfe0572ce0c3a32b
         this.view = new View(model);
         VSS.resize();
     }
@@ -40,10 +36,6 @@ export class WorkitemController {
         WorkItemFormService.getService().then((service) => {
             service.getFieldValues(["System.WorkItemType"]).then((fields) => {
                 let workItemType = fields["System.WorkItemType"];
-<<<<<<< HEAD
-=======
-                // Ocultar si no es User Story (ejemplo de cómo se podría ocultar)
->>>>>>> f16e1e2df3720139b0b9fc9ecfe0572ce0c3a32b
                 if (workItemType === "User Story") {
                     this.view.setVisible(true);
                 } else {
@@ -52,8 +44,4 @@ export class WorkitemController {
             });
         });
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> f16e1e2df3720139b0b9fc9ecfe0572ce0c3a32b

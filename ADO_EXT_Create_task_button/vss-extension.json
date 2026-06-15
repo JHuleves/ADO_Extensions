@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "Action-Button-Control",
-    "version": "1.4.4",
-    "name": "Action Button Control",
+    "id": "create-task-button",
+    "version": "1.0.0",
+    "name": "Create Task Button",
     "scopes": [
         "vso.work",
         "vso.work_write",
@@ -11,7 +11,7 @@
         "vso.project",
         "vso.security_manage"
     ],
-    "description": "Runs an Action",
+    "description": "Runs an Action to create SAP Tasks",
     "publisher": "JHuelves",
     "icons": {
         "default": "img/logo.png"

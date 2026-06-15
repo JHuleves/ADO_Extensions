@@ -2,7 +2,7 @@ import { WorkItemFormNavigationService } from "TFS/WorkItemTracking/Services";
 import RestClient = require("TFS/WorkItemTracking/RestClient");
 import { WorkItem, WorkItemExpand, WorkItemRelation } from "TFS/WorkItemTracking/Contracts";
 import { JsonPatchDocument } from "VSS/WebApi/Contracts";
-import { documentBuild } from "./modelll";
+import { documentBuild } from "./model";
  
 export class Model2Widget {
     $button: JQuery;

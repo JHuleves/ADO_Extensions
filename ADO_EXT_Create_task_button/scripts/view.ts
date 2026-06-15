@@ -1,4 +1,4 @@
-import { Model } from "./modelll";
+import { Model } from "./model";
 export class View {
     private container: JQuery;
     constructor(model: Model) {

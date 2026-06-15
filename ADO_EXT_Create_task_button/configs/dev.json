@@ -1,6 +1,6 @@
 {
-    "id": "Action-Button",
+    "id": "CreateTaskButton",
     "publisher": "JHuelves",
-    "name": "Action Button Control",
+    "name": "Create Task Button Control",
     "public": true
 }
