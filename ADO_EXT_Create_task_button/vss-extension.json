@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "create-task-button",
-    "version": "1.0.1",
-    "name": "Create Task Button Control",
+    "id": "create-task-button-v2026",
+    "version": "1.0.0",
+    "name": "Create Task Button V2026",
     "scopes": [
         "vso.work",
         "vso.work_write",
@@ -17,7 +17,7 @@
         "default": "img/logo.png"
     },
     "targets": [{
-        "id": "Microsoft.VisualStudio.Services"
+        "id": "create-task-button-v2026"
     }],
     "tags": [
         "Work Item",
@@ -95,19 +95,19 @@
         "Azure Boards"
     ],
     "contributions": [{
-            "id": "CreateTaskButton",
+            "id": "create-task-button-v2026",
             "description": "Runs an action",
             "type": "ms.vss-work-web.work-item-form-control",
             "targets": [
                 "ms.vss-work-web.work-item-form"
             ],
             "properties": {
-                "name": "Actions control",
+                "name": "Create Task Button V2026",
                 "uri": "index.html",
                 "height": 200,
                 "inputs": [{
-                        "id": "ButtonsNames",
-                        "name": "Buttons names",
+                        "id": "create-task-button-v2026",
+                        "name": "Create Task Button V2026",
                         "description": "This field will be what the button is named on your page, (can be more then one by using ,) .",
                         "type": "TextArea",
                         "properties": {
@@ -123,8 +123,8 @@
                         }
                     },
                     {
-                        "id": "Activity",
-                        "name": "Activity",
+                        "id": "create-task-button-v2026",
+                        "name": "Create Task Button V2026",
                         "description": "Activity type (Analysis, Consulting, Development, etc.). Seperated by ,",
                         "type": "TextArea",
                         "properties": {
@@ -140,8 +140,8 @@
                         }
                     },
                     {
-                        "id": "Log",
-                        "name": "Log",
+                        "id": "create-task-button-v2026",
+                        "name": "Create Task Button V2026",
                         "description": "Enable console logging for debugging.",
                         "inputMode": "CheckBox",
                         "validation": {
@@ -149,8 +149,8 @@
                         }
                     },
                     {
-                        "id": "BypassRules",
-                        "name": "Bypass Rules",
+                        "id": "create-task-button-v2026",
+                        "name": "Create Task Button V2026",
                         "description": "Allows setting values on read-only fields (Requires specific permissions).",
                         "inputMode": "CheckBox",
                         "validation": {
@@ -161,27 +161,27 @@
             }
         },
         {
-            "id": "configureFunctions",
+            "id": "create-task-button-v2026",
             "type": "ms.vss-web.hub",
             "description": "add commands to buttons",
             "targets": [
                 "ms.vss-web.collection-admin-hub-group"
             ],
             "properties": {
-                "name": "Create Task Button",
+                "name": "Create Task Button V2026",
                 "uri": "configCreateTaskButton.html",
                 "order": 99
             }
         },
         {
-            "id": "ButtonsWidget",
+            "id": "create-task-button-v2026",
             "type": "ms.vss-dashboards-web.widget",
             "targets": [
                 "ms.vss-dashboards-web.widget-catalog",
                 ".CreateTaskButtonWidget.Configuration"
             ],
             "properties": {
-                "name": "Create Task Button Widget",
+                "name": "Create Task Button V2026",
                 "description": "Add action button",
                 "catalogIconUrl": "img/CatalogIcon.png",
                 "previewImageUrl": "img/preview.png",
@@ -204,13 +204,13 @@
             }
         },
         {
-            "id": "CreateTaskButtonWidget.Configuration",
+            "id": "create-task-button-v2026",
             "type": "ms.vss-dashboards-web.widget-configuration",
             "targets": [
                 "ms.vss-dashboards-web.widget-configuration"
             ],
             "properties": {
-                "name": "CreateTaskButtonWidget Configuration",
+                "name": "Create Task Button V2026",
                 "description": "Configures CreateTaskButtonWidget",
                 "uri": "widgetConfiguration.html"
             }
