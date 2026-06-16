@@ -1,8 +1,8 @@
 {
     "manifestVersion": 1,
-    "id": "gestamp-create-task-button",
+    "id": "CreateTaskButton",
     "version": "1.0.0",
-    "name": "Create Task Button Control",
+    "name": "Create Task Button",
     "scopes": [
         "vso.work",
         "vso.work_write",
