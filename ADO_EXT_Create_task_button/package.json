@@ -27,7 +27,7 @@
     },
     "name": "CreateTaskButton",
     "private": false,
-    "version": "1.1.6",
+    "version": "1.1.9",
     "scripts": {},
     "dependencies": {
         "@types/node": "^13.7.7",

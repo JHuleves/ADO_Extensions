@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "CreateTaskButton",
-    "version": "1.1.6",
+    "version": "1.1.9",
     "name": "CreateTaskButton",
     "description": "Extensión de Work Items para Azure DevOps",
     "publisher": "Jhuelves",
@@ -13,19 +13,78 @@
     "categories": [
         "Azure Boards"
     ],
+    "scopes": [
+        "vso.work"
+    ],
+    "contributions": [
+        {
+            "id": "CreateTaskButton-control",
+            "type": "ms.vss-work-web.work-item-form-control",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "name": "CreateTaskButton",
+                "uri": "index.html"
+            }
+        }
+    ],
     "files": [
         {
             "path": "package.json",
             "addressable": true
         },
         {
+            "path": "configCreateTaskButton.html",
+            "addressable": true
+        },
+        {
+            "path": "details.md",
+            "addressable": true
+        },
+        {
+            "path": "gruntfile.js",
+            "addressable": true
+        },
+        {
+            "path": "index.html",
+            "addressable": true
+        },
+        {
+            "path": "karma.conf.js",
+            "addressable": true
+        },
+        {
+            "path": "LICENSE.md",
+            "addressable": true
+        },
+        {
+            "path": "PRIVACY.md",
+            "addressable": true
+        },
+        {
             "path": "README.md",
             "addressable": true
+        },
+        {
+            "path": "test-main.js",
+            "addressable": true
+        },
+        {
+            "path": "widgetConfiguration.html",
+            "addressable": true
+        },
+        {
+            "path": "widgetCreateTaskButton.html",
+            "addressable": true
+        },
+        {
+            "path": "img/logo.png",
+            "addressable": true
+        },
+        {
+            "path": "styles/style.css",
+            "addressable": true
         }
-    ],
-    "content": {
-        "details": {
-            "path": "README.md"
-        }
-    }
+    ]
 }
