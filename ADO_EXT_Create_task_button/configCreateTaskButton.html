@@ -3,19 +3,34 @@
 
 <head>
     <meta charset="utf-8" />
-    <script src="scripts/VSS.SDK.min.js"></script>
+    <script src="https://unpkg.com/vss-web-extension-sdk/lib/VSS.SDK.min.js"></script>
     <title>Config Create Task Button</title>
     <script>
         VSS.init({
             explicitNotifyLoaded: true,
-            usePlatformScripts: true,
-            usePlatformStyles: true,
-            configureModuleLoader: true,
-            applyTheme: true
+//            usePlatformScripts: true,
+            usePlatformStyles: true
+//            configureModuleLoader: true,
+//            applyTheme: true
         });
-        VSS.require(["scripts/appConfig"], function() {
-            VSS.notifyLoadSucceeded();
-        });
+//        VSS.require(["scripts/appConfig"], function() {
+//            VSS.notifyLoadSucceeded();
+//        });
+
+
+
+        VSS.ready(function () {
+            try {
+                document.body.innerHTML = "<h2 style='color:green'>CONTROL OK</h2>";
+                VSS.notifyLoadSucceeded();
+            } catch (e) {
+                console.error(e);
+                VSS.notifyLoadFailed(e);
+            }
+
+
+    });
+
     </script>
 </head>
 

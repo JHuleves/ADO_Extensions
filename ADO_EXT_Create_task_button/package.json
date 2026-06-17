@@ -27,12 +27,12 @@
     },
     "name": "CreateTaskButton",
     "private": false,
-    "version": "1.1.9",
+    "version": "1.1.22",
     "scripts": {},
     "dependencies": {
         "@types/node": "^13.7.7",
         "azure-devops-node-api": "^10.1.0",
         "http-proxy-agent": "^4.0.1"
     },
-    "publisher": "Jhuelves"
+    "publisher": "JHuelves"
 }
