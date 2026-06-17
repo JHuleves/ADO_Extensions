@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://microsoft.com" xmlns:d="http://microsoft.com">
+    <Metadata>
+        
+        <DisplayName>CreateTaskButton</DisplayName>
+        <Description>Extensión para Azure DevOps</Description>
+        <Categories>Azure Pipelines</Categories>
+        <GalleryFlags>Public</GalleryFlags>
+    </Metadata>
+    <Dependencies />
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Services" />
+    </Installation>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.Services.Content.Details" Path="README.md" Addressable="true" />
+        <Asset Type="Microsoft.VisualStudio.Services.Manifest" Path="package.json" Addressable="true" />
+    </Assets>
+</PackageManifest>
