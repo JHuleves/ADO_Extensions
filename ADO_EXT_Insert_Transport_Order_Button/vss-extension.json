@@ -2,31 +2,12 @@
     "manifestVersion": 1,
     "id": "insert-transport-order-button",
     "name": "insert-transport-order-button",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "publisher": "JHuelves",
-    "scopes": [
-        "vso.work",
-        "vso.work_write",
-        "vso.identity",
-        "vso.graph",
-        "vso.project",
-        "vso.security_manage"
-    ],    
-    "description": "Insert Transport Order for SAP",    
-    "icons": {
-        "default": "img/logo.png"    
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],
-        "tags": [
-        "Work Item",
-        "Work Item control",
-        "Usability",
-        "Button",
-        "Aggrigator",
-        "Action"
     ],
     "categories": [
         "Azure Boards"
@@ -35,180 +16,16 @@
         {
             "id": "insert-transport-order-button-control",
             "type": "ms.vss-work-web.work-item-form-control",
-            "description": "Insert Transport Order for SAP",                
             "targets": [
                 "ms.vss-work-web.work-item-form"
             ],
             "properties": {
                 "name": "insert-transport-order-button",
                 "uri": "index.html"
-                "height": 200,       
-                "inputs": [
-                    {
-                        "id": "ButtonsNames",
-                        "name": "Buttons names",
-                        "description": "This field will be what the button is named on your page, (can be more then one by using ,) .",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-
-                    {
-                        "id": "TransportOrder",
-                        "name": "Transport Order",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "NSD",
-                        "name": "Need System Down",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                          
-                    {
-                        "id": "NTB",
-                        "name": "Need Transaction BLoked",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "Comments",
-                        "name": "Comments",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "TransportOrderData",
-                        "name": "Conacate field"
-                    {
-                        "id": "CHACK_ODATA",
-                        "name": "Check Odata SAP",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "URI_Odata",
-                        "name": "URI SAP Odata",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "SAP_USER",
-                        "name": "SAP USer",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
-                    {
-                        "id": "SAP_PASS ",
-                        "name": "SAP Password",
-                        "description": "",
-                        "type": "TextArea",
-                        "properties": {
-                            "workItemFieldTypes": [
-                                "Integer",
-                                "Double",
-                                "String"
-                            ]
-                        },
-                        "validation": {
-                            "dataType": "String",
-                            "isRequired": false
-                        }
-                    },                         
             }
         }
     ],
     "files": [
-        {
-            "path": "img",
-            "addressable": true
-        },
         {
             "path": "configActionButton.html",
             "addressable": true
