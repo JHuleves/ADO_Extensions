@@ -1,195 +1,113 @@
 {
     "manifestVersion": 1,
     "id": "insert-transport-order-button",
-    "version": "1.0.1",
-    "name": "Insert Transport Order Button",
-    "scopes": [
-        "vso.work",
-        "vso.work_write",
-        "vso.identity",
-        "vso.graph",
-        "vso.project",
-        "vso.security_manage"
-    ],
-    "description": "An Azure DevOps extension that validates and inserts SAP Transport Orders on work items.",
+    "name": "insert-transport-order-button",
+    "version": "1.0.2",
     "publisher": "JHuelves",
-    "icons": {
-        "default": "img/logo.png"
-    },
-    "targets": [{
-        "id": "Microsoft.VisualStudio.Services"
-    }],
-    "tags": [
-        "Work Item",
-        "Work Item control",
-        "Usability",
-        "Button",
-        "Action",
-        "SAP",
-        "Transport Order"
-    ],
-    "content": {
-        "details": {
-            "path": "details.md"
-        },
-        "license": {
-            "path": "LICENSE.md"
-        },
-        "privacy": {
-            "path": "PRIVACY.md"
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
         }
+    ],
+    "icons": {
+      "default": "images/logo.png"
     },
-    "repository": {
-        "type": "git",
-        "uri": "https://github.com/avih75/TFS_Action_Button"
-    },
-    "files": [{
-            "path": "img",
+    "categories": [
+        "Azure Boards"
+    ],
+    "contributions": [
+        {
+            "id": "insert-transport-order-button-control",
+            "type": "ms.vss-work-web.work-item-form-control",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "name": "insert-transport-order-button",
+                "uri": "index.html"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "configActionButton.html",
             "addressable": true
         },
         {
-            "path": "scripts",
+            "path": "configCreateTaskButton.html",
             "addressable": true
         },
         {
-            "path": "styles",
+            "path": "gruntfile.js",
             "addressable": true
         },
         {
             "path": "index.html",
             "addressable": true
+        },
+        {
+            "path": "karma.conf.js",
+            "addressable": true
+        },
+        {
+            "path": "test-main.js",
+            "addressable": true
+        },
+        {
+            "path": "test_logic.js",
+            "addressable": true
+        },
+        {
+            "path": "widgetActionButton.html",
+            "addressable": true
+        },
+        {
+            "path": "widgetConfiguration.html",
+            "addressable": true
+        },
+        {
+            "path": "widgetCreateTaskButton.html",
+            "addressable": true
+        },
+        {
+            "path": "scripts/app.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/model.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/view.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/VSS.SDK.min.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/workitemControl.js",
+            "addressable": true
+        },
+        {
+            "path": "styles/style.css",
+            "addressable": true
+        },
+        {
+            "path": "test/scripts/app.js",
+            "addressable": true
+        },
+        {
+            "path": "test/scripts/model.js",
+            "addressable": true
+        },
+        {
+            "path": "test/scripts/view.js",
+            "addressable": true
+        },
+        {
+            "path": "test/scripts/workitemControl.js",
+            "addressable": true
         }
-    ],
-    "categories": [
-        "Azure Boards"
-    ],
-    "contributions": [{
-        "id": "InsertTransportOrderButton",
-        "description": "Validates and inserts SAP Transport Orders",
-        "type": "ms.vss-work-web.work-item-form-control",
-        "targets": [
-            "ms.vss-work-web.work-item-form"
-        ],
-        "properties": {
-            "name": "Insert Transport Order Button",
-            "uri": "index.html",
-            "height": 50,
-            "inputs": [
-                {
-                    "id": "ButtonText",
-                    "name": "Button Text",
-                    "description": "Texto que se mostrara en el boton",
-                    "type": "String",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "TransportOrderField",
-                    "name": "Transport Order Field",
-                    "description": "Campo del work Item Task que se leera como 'Transport Order'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "NeedSystemDownField",
-                    "name": "Need System Down Field",
-                    "description": "Campo del work Item Task que se leera como flag de 'Need System Down'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "Boolean"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "NeedTransactionBlockedField",
-                    "name": "Need Transaction Blocked Field",
-                    "description": "Campo del work Item Task que se leera como flag de 'Need Transaction BLoked'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "Boolean"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "CommentsField",
-                    "name": "Comments Field",
-                    "description": "Campo del work Item Task que se leera como 'Comments'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "TransportOrderDataField",
-                    "name": "Transport Order Data Field",
-                    "description": "Campo del work Item Task que se usara como 'TransportOrderData' destino de la concatenacion",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "PlainText", "Html"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "CheckOdataSap",
-                    "name": "Check Odata SAP",
-                    "description": "Flag 'Check Odata SAP' que indica si se activa o no la verificacion con SAP mediante el Odata ZBC_OD_TRANSPORT_ORDER_STATUS",
-                    "inputMode": "CheckBox",
-                    "validation": {
-                        "dataType": "Boolean"
-                    }
-                },
-                {
-                    "id": "OdataUri",
-                    "name": "Odata URI",
-                    "description": "URI del Odata que es obligatorio",
-                    "type": "String",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
-                },
-                {
-                    "id": "SapUser",
-                    "name": "SAP User",
-                    "description": "Usuario SAP para la conexion",
-                    "type": "String",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": false
-                    }
-                },
-                {
-                    "id": "SapPassword",
-                    "name": "SAP Password",
-                    "description": "Password SAP",
-                    "type": "String",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": false
-                    }
-                }
-            ]
-        }
-    }]
+    ]
 }
