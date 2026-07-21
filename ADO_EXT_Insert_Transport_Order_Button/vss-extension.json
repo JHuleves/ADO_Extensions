@@ -190,6 +190,122 @@
                     }
                 }
             ]
-        }
+        },
+        "inputs": [
+            {
+                "id": "ButtonText",
+                "name": "Button Text",
+                "description": "Texto que se mostrara en el boton",
+                "type": "String",
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "TransportOrderField",
+                "name": "Transport Order Field",
+                "description": "Campo del work Item Task que se leera como 'Transport Order'",
+                "type": "WorkItemField",
+                "properties": {
+                    "workItemFieldTypes": ["String"]
+                },
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "NeedSystemDownField",
+                "name": "Need System Down Field",
+                "description": "Campo del work Item Task que se leera como flag de 'Need System Down'",
+                "type": "WorkItemField",
+                "properties": {
+                    "workItemFieldTypes": ["String", "Boolean"]
+                },
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "NeedTransactionBlockedField",
+                "name": "Need Transaction Blocked Field",
+                "description": "Campo del work Item Task que se leera como flag de 'Need Transaction BLoked'",
+                "type": "WorkItemField",
+                "properties": {
+                    "workItemFieldTypes": ["String", "Boolean"]
+                },
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "CommentsField",
+                "name": "Comments Field",
+                "description": "Campo del work Item Task que se leera como 'Comments'",
+                "type": "WorkItemField",
+                "properties": {
+                    "workItemFieldTypes": ["String"]
+                },
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "TransportOrderDataField",
+                "name": "Transport Order Data Field",
+                "description": "Campo del work Item Task que se usara como 'TransportOrderData' destino de la concatenacion",
+                "type": "WorkItemField",
+                "properties": {
+                    "workItemFieldTypes": ["String", "PlainText", "Html"]
+                },
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "CheckOdataSap",
+                "name": "Check Odata SAP",
+                "description": "Flag 'Check Odata SAP' que indica si se activa o no la verificacion con SAP mediante el Odata ZBC_OD_TRANSPORT_ORDER_STATUS",
+                "inputMode": "CheckBox",
+                "validation": {
+                    "dataType": "Boolean"
+                }
+            },
+            {
+                "id": "OdataUri",
+                "name": "Odata URI",
+                "description": "URI del Odata que es obligatorio",
+                "type": "String",
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": true
+                }
+            },
+            {
+                "id": "SapUser",
+                "name": "SAP User",
+                "description": "Usuario SAP para la conexion",
+                "type": "String",
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": false
+                }
+            },
+            {
+                "id": "SapPassword",
+                "name": "SAP Password",
+                "description": "Password SAP",
+                "type": "String",
+                "validation": {
+                    "dataType": "String",
+                    "isRequired": false
+                }
+            }
+        ]
     }]
 }
