@@ -27,7 +27,7 @@
     },
     "name": "insert-transport-order-button",
     "private": false,
-    "version": "1.0.2",
+    "version": "1.0.3",
     "scripts": {
         "postinstall": "typings install"
     },

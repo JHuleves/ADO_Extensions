@@ -2,16 +2,15 @@
     "manifestVersion": 1,
     "id": "insert-transport-order-button",
     "name": "insert-transport-order-button",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "publisher": "JHuelves",
+    "icons": {
+        "default": "img/logo.png"    
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
     ],
-    "icons": {
-      "default": "images/logo.png"
-    },
     "categories": [
         "Azure Boards"
     ],
