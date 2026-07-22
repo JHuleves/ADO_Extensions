@@ -1,0 +1,36 @@
+ADO_Extensions\ADO_EXT_Insert_Transport_Order_Button 
+USando lo ya avanzado en la sesion https://jules.google.com/task/11764322786282315132, complemtamos lo que falte por realizar.
+
+Usando como base la logia desarrollada para esta aplicacion, vamos a generar un nueva extension para Azure DevOps
+que se llamara "Insert Transport Order Button" y que se almacenara en la carpeta ADO_EXT_Insert_Transport_Order_Button
+del repositorio ADO_Extensions.
+
+Para configurar este boton, usaremos como base el codigo de "Action_Button_Control-master".
+
+Como parametro de configuracion del control y que luego se usara en el codigo, sera:
+
+Texto que se mostrara en el boton
+Campo del work Item Task que se leera como "Transport Order"
+Campo del work Item Task que se leera como flag de "Need System Down"
+Campo del work Item Task que se leera como flag de "Need Transaction BLoked"
+Campo del work Item Task que se leera como "Comments"
+Campo del work Item Task que se usara como "TransportOrderData" destino de la concatenacion
+Flag "Check Odata SAP" que indica si se activa o no la verificacion con SAP mediante el Odata ZBC_OD_TRANSPORT_ORDER_STATUS
+URI del Odata que es obligatorio
+Usuario SAP para la conexion
+Password SAP
+
+La pulsar el boton:
+Si el campo indicado como "Transport Order" esta vacio, no se realiza ninguna accion. 
+Si el contenido del campo indicado como "Transport Order" no es de 10 carateres, se da un mensaje de error indicando que el tamaño es incorrecto
+Revisar si el contenido del campo indicado como "Comments" contien algun ";", en cuyo caso, mostraremos un error indicando que no se permite su uso.
+Si el parametro "Check Odata SAP" esta activo, se realiza la consulta al Odata. 
+Si no se puede establecer la comunicacion se muestra mensaje de error. 
+Si la consulta al Odata devuelve que la orden no existe, se muestra un mensaje y se inicializan los campos del work item indicado en "Transport Order","Need System Down", 
+"Need Transaction BLoked" y "Comments". 
+Si todo se desarrolla correctamente, leeremos el campo indicado en "TransportOrderData" cuyo contenido es una concatenzacion separada por ";" y cuya estructura esta detallada 
+en el campo "StructureOrderData" del work item. Se comprobara si la orden ya existe entre los datos. 
+Si exite, se actualizaran los datos de la line con lo leido de los campos y del Odata. Si no existe, se incrementara en 1 la secuencia y se añadira una linea nueva.
+
+Genera el fichero VSIX para su publicación en el Market De Azure con el nombre Insert_Transport_Order_Button y añadiendo el numero de version , 
+comenzando por 1.0.0, en el nombre del fichero
