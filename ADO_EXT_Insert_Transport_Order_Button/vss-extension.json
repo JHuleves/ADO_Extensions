@@ -3,191 +3,120 @@
     "id": "insert-transport-order-button",
     "version": "1.0.1",
     "name": "Insert Transport Order Button",
+    "description": "Validates and inserts SAP Transport Orders on work items.",
+    "publisher": "JHuelves",
+    "targets": [{ "id": "Microsoft.VisualStudio.Services" }],
+    "categories": ["Azure Boards"],
+    "icons": {
+        "default": "img/logo.png"
+    },
     "scopes": [
         "vso.work",
         "vso.work_write",
         "vso.identity",
         "vso.graph",
-        "vso.project",
-        "vso.security_manage"
-    ],
-    "description": "An Azure DevOps extension that validates and inserts SAP Transport Orders on work items.",
-    "publisher": "JHuelves",
-    "icons": {
-        "default": "img/logo.png"
-    },
-    "targets": [{
-        "id": "Microsoft.VisualStudio.Services"
-    }],
-    "tags": [
-        "Work Item",
-        "Work Item control",
-        "Usability",
-        "Button",
-        "Action",
-        "SAP",
-        "Transport Order"
+        "vso.project"
     ],
     "content": {
-        "details": {
-            "path": "details.md"
-        },
-        "license": {
-            "path": "LICENSE.md"
-        },
-        "privacy": {
-            "path": "PRIVACY.md"
-        }
+        "details": { "path": "README.md"   },
+        "license": { "path": "LICENSE.md"  },
+        "privacy":  { "path": "PRIVACY.md" }
     },
-    "repository": {
-        "type": "git",
-        "uri": "https://github.com/avih75/TFS_Action_Button"
-    },
-    "files": [{
-            "path": "img",
-            "addressable": true
-        },
-        {
-            "path": "scripts",
-            "addressable": true
-        },
-        {
-            "path": "styles",
-            "addressable": true
-        },
-        {
-            "path": "index.html",
-            "addressable": true
-        }
-    ],
-    "categories": [
-        "Azure Boards"
+    "files": [
+        { "path": "img",       "addressable": true },
+        { "path": "scripts",   "addressable": true },
+        { "path": "styles",    "addressable": true },
+        { "path": "index.html","addressable": true },
+        { "path": "README.md", "addressable": true }
     ],
     "contributions": [{
-        "id": "InsertTransportOrderButton",
-        "description": "Validates and inserts SAP Transport Orders",
+        "id": "InsertTransportOrderButtonControl",
+        "description": "Insert Transport Order button – valida e inserta órdenes de transporte SAP",
         "type": "ms.vss-work-web.work-item-form-control",
-        "targets": [
-            "ms.vss-work-web.work-item-form"
-        ],
+        "targets": ["ms.vss-work-web.work-item-form"],
         "properties": {
-            "name": "Insert Transport Order Button",
-            "uri": "index.html",
+            "name": "Insert Transport Order Button Control",
+            "uri":  "index.html",
             "height": 50,
             "inputs": [
                 {
                     "id": "ButtonText",
                     "name": "Button Text",
-                    "description": "Texto que se mostrara en el boton",
-                    "type": "string",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Texto que se mostrará en el botón.",
+                    "properties": { "defaultValue": "Insert Transport Order" },
+                    "validation":  { "isRequired": false }
                 },
                 {
                     "id": "TransportOrderField",
                     "name": "Transport Order Field",
-                    "description": "Campo del work Item Task que se leera como 'Transport Order'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Campo del work Item Task que se leerá como 'Transport Order'",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "NeedSystemDownField",
                     "name": "Need System Down Field",
-                    "description": "Campo del work Item Task que se leera como flag de 'Need System Down'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "Boolean"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Campo del work Item Task que se leerá como flag de 'Need System Down'",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "NeedTransactionBlockedField",
                     "name": "Need Transaction Blocked Field",
-                    "description": "Campo del work Item Task que se leera como flag de 'Need Transaction BLoked'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "Boolean"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Campo del work Item Task que se leerá como flag de 'Need Transaction BLoked'",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "CommentsField",
                     "name": "Comments Field",
-                    "description": "Campo del work Item Task que se leera como 'Comments'",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Campo del work Item Task que se leerá como 'Comments'",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "TransportOrderDataField",
                     "name": "Transport Order Data Field",
-                    "description": "Campo del work Item Task que se usara como 'TransportOrderData' destino de la concatenacion",
-                    "type": "WorkItemField",
-                    "properties": {
-                        "workItemFieldTypes": ["String", "PlainText", "Html"]
-                    },
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "type": "String",
+                    "description": "Campo del work Item Task que se usará como 'TransportOrderData' destino de la concatenación",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "CheckOdataSap",
                     "name": "Check Odata SAP",
-                    "description": "Flag 'Check Odata SAP' que indica si se activa o no la verificacion con SAP mediante el Odata ZBC_OD_TRANSPORT_ORDER_STATUS",
-                    "inputMode": "CheckBox",
-                    "validation": {
-                        "dataType": "Boolean"
-                    }
+                    "type": "Boolean",
+                    "description": "Flag 'Check Odata SAP' que indica si se activa o no la verificación con SAP mediante el Odata ZBC_OD_TRANSPORT_ORDER_STATUS",
+                    "properties": { "defaultValue": "false" }
                 },
                 {
                     "id": "OdataUri",
                     "name": "Odata URI",
+                    "type": "String",
                     "description": "URI del Odata que es obligatorio",
-                    "type": "string",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": true
-                    }
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": true }
                 },
                 {
                     "id": "SapUser",
                     "name": "SAP User",
-                    "description": "Usuario SAP para la conexion",
-                    "type": "string",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": false
-                    }
+                    "type": "String",
+                    "description": "Usuario SAP para la conexión",
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": false }
                 },
                 {
                     "id": "SapPassword",
                     "name": "SAP Password",
+                    "type": "String",
                     "description": "Password SAP",
-                    "type": "string",
-                    "validation": {
-                        "dataType": "String",
-                        "isRequired": false
-                    }
+                    "properties": { "defaultValue": "" },
+                    "validation":  { "isRequired": false }
                 }
             ]
         }

@@ -1,6 +1,6 @@
 {
-    "id": "insert-transport-order-button",
+    "id":        "insert-transport-order-button",
+    "name":      "Insert Transport Order Button",
     "publisher": "JHuelves",
-    "name": "Insert Transport Order Button",
-    "public": true
+    "public":    true
 }

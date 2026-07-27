@@ -1,0 +1,5 @@
+# Permitir ficheros compilados y VSIX en esta subcarpeta (override del .gitignore raíz)
+!scripts/*.js
+!VSIX_Files/*.vsix
+node_modules/
+tsconfig_build.json
