@@ -1,11 +1,9 @@
-ADO_Extensions\ADO_EXT_Insert_Transport_Order_Button 
-USando lo ya avanzado en la sesion https://jules.google.com/task/11764322786282315132, complemtamos lo que falte por realizar.
+Clona ADO_Extensions\ADO_EXT_Insert_Transport_Order_Button 
 
-Usando como base la logia desarrollada para esta aplicacion, vamos a generar un nueva extension para Azure DevOps
-que se llamara "Insert Transport Order Button" y que se almacenara en la carpeta ADO_EXT_Insert_Transport_Order_Button
-del repositorio ADO_Extensions.
+Analiza lo ya desarrollado y completa hasta cubrir las necesidades detalladas mas adelanes.
 
-Para configurar este boton, usaremos como base el codigo de "Action_Button_Control-master".
+Vamos a generar un nueva extension para Azure DevOps que se llamara "Insert Transport Order Button" 
+y que se almacenara en la carpeta ADO_EXT_Insert_Transport_Order_Button del repositorio ADO_Extensions.
 
 Como parametro de configuracion del control y que luego se usara en el codigo, sera:
 
@@ -33,4 +31,4 @@ en el campo "StructureOrderData" del work item. Se comprobara si la orden ya exi
 Si exite, se actualizaran los datos de la line con lo leido de los campos y del Odata. Si no existe, se incrementara en 1 la secuencia y se añadira una linea nueva.
 
 Genera el fichero VSIX para su publicación en el Market De Azure con el nombre Insert_Transport_Order_Button y añadiendo el numero de version , 
-comenzando por 1.0.0, en el nombre del fichero
+que actualmente es la 1.0.4, en el nombre del fichero
