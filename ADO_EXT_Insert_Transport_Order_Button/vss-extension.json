@@ -1,6 +1,6 @@
 {
     "manifestVersion": 1,
-    "id": "insert_sap_OT_button",
+    "id": "insert-sap-ot-button",
     "version": "1.0.1",
     "name": "Insert Transport Order Button",
     "description": "Validates and inserts SAP Transport Orders on work items.",
