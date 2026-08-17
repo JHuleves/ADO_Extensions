@@ -73,3 +73,17 @@ Nota técnica: los métodos internos quedaron tipados como `PromiseLike<void>` e
 (basadas en Q), que no implementan `.catch()` a nivel de tipos aunque sí funcionan igual en
 tiempo de ejecución; por eso en `view.ts` se usa `.then(onFulfilled, onRejected)` en vez de
 `.catch().then()`.
+
+## Iteración 3 (id renombrado por colisión en el Marketplace)
+
+El id `insert-transport-order-button` ya existía en el Marketplace (probablemente por un intento
+previo de publicación de la rama de Jules), así que se renombra a **`insert_sap_ot_button`**:
+
+- `vss-extension.json`: `id` → `insert_sap_ot_button`, `name` → `Insert Transport Order Button`
+  (antes coincidía con el id en minúsculas, no era un nombre legible).
+- `configs/release.json`: `id` → `insert_sap_ot_button`.
+- `configs/dev.json`: `id` → `insert_sap_ot_button-dev`.
+
+Identidad completa ahora: `JHuelves.insert_sap_ot_button`. El nombre del fichero VSIX no cambia
+(`Insert_Transport_Order_Button-1.0.4.vsix`), ya que esa convención de nombre de fichero se pidió
+sobre el nombre visible, no sobre el id interno.

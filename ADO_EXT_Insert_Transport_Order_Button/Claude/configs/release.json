@@ -1,5 +1,5 @@
 {
-    "id": "insert-transport-order-button",
+    "id": "insert_sap_ot_button",
     "publisher": "JHuelves",
     "name": "Insert Transport Order Button",
     "public": true

@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "insert-transport-order-button",
-    "name": "insert-transport-order-button",
+    "id": "insert_sap_ot_button",
+    "name": "Insert Transport Order Button",
     "version": "1.0.4",
     "publisher": "JHuelves",
     "description": "Botón para el formulario de work item que valida, concatena y opcionalmente verifica contra SAP (OData ZBC_OD_TRANSPORT_ORDER_STATUS) los datos de una orden de transporte.",
