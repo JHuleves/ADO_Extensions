@@ -56,3 +56,20 @@ secuencia) ya estaba correctamente implementada y se ha mantenido casi intacta. 
 dentro del layout/proceso del work item — es el mecanismo estándar de este tipo de control, sin
 cifrado propio. Si la política de seguridad lo requiere, usa un usuario de servicio SAP de solo
 lectura sobre el OData en vez de credenciales personales.
+
+## Iteración 2 (retoques solicitados)
+
+1. **`buttonPressed()` ahora devuelve una promesa real** (`PromiseLike<void>`, propagada desde
+   `WorkItemFormService`/`queryOData`/`setFieldValue(s)`) en vez de ser `void`. Antes el botón
+   no tenía forma de saber cuándo terminaba de verdad el trabajo (incluida la consulta OData).
+2. **`view.ts`**: el botón se deshabilita y muestra "Procesando..." mientras esa promesa está
+   en curso, y se reactiva solo cuando termina (éxito o error) — ya no es un `setTimeout` fijo
+   de 100ms que se reactivaba igual aunque la llamada a SAP siguiera en marcha.
+3. **`workitemControl.ts`**: `.trim()` en todos los inputs de texto de configuración, por si el
+   administrador deja espacios accidentales al pegar el nombre de un campo.
+
+Nota técnica: los métodos internos quedaron tipados como `PromiseLike<void>` en vez de
+`Promise<void>` porque el SDK de VSS (`WorkItemFormService`) devuelve sus propias promesas
+(basadas en Q), que no implementan `.catch()` a nivel de tipos aunque sí funcionan igual en
+tiempo de ejecución; por eso en `view.ts` se usa `.then(onFulfilled, onRejected)` en vez de
+`.catch().then()`.

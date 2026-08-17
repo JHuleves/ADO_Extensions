@@ -36,8 +36,21 @@ export class View {
             }
         );
 
+        let originalText = actionButton.text();
         actionButton.click(() => {
-            model.buttonPressed();
+            actionButton.prop("disabled", true);
+            actionButton.css("cursor", "default");
+            actionButton.text(" Procesando... ");
+
+            // buttonPressed() devuelve una promesa que no se resuelve hasta que
+            // termina todo el trabajo real (incluida la consulta OData si aplica),
+            // así el botón permanece deshabilitado el tiempo que corresponde.
+            let restoreButton = () => {
+                actionButton.prop("disabled", false);
+                actionButton.css("cursor", "pointer");
+                actionButton.text(originalText);
+            };
+            model.buttonPressed().then(restoreButton, restoreButton);
         });
 
         container.append(actionButton);

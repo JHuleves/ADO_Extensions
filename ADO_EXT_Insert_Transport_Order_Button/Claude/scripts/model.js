@@ -16,11 +16,11 @@ define(["require", "exports", "TFS/WorkItemTracking/Services"], function (requir
             this.sapPassword = sapPassword;
         }
         Model.prototype.buttonPressed = function () {
-            this.executeLogic();
+            return this.executeLogic();
         };
         Model.prototype.executeLogic = function () {
             var _this = this;
-            Services_1.WorkItemFormService.getService().then(function (service) {
+            return Services_1.WorkItemFormService.getService().then(function (service) {
                 var fieldsToRead = [
                     _this.transportOrderField,
                     _this.needSystemDownField,
@@ -32,7 +32,7 @@ define(["require", "exports", "TFS/WorkItemTracking/Services"], function (requir
                 ];
                 // Filter out empty or duplicate field names
                 fieldsToRead = fieldsToRead.filter(function (f, idx) { return f && f.trim() !== "" && fieldsToRead.indexOf(f) === idx; });
-                service.getFieldValues(fieldsToRead).then(function (values) {
+                return service.getFieldValues(fieldsToRead).then(function (values) {
                     var transportOrderValue = (values[_this.transportOrderField] || "").toString().trim();
                     var needSystemDownValue = values[_this.needSystemDownField];
                     var needTransactionBlockedValue = values[_this.needTransactionBlockedField];
@@ -57,29 +57,30 @@ define(["require", "exports", "TFS/WorkItemTracking/Services"], function (requir
                         return;
                     }
                     var proceedWithODataAndInsert = function (odataData) {
-                        _this.processTransportOrderData(service, transportOrderValue, needSystemDownValue, needTransactionBlockedValue, commentsValue, transportOrderDataValue, structureOrderDataStr, odataData);
+                        return _this.processTransportOrderData(service, transportOrderValue, needSystemDownValue, needTransactionBlockedValue, commentsValue, transportOrderDataValue, structureOrderDataStr, odataData);
                     };
                     // 4. Si el parametro "Check Odata SAP" esta activo, se realiza la consulta al Odata.
                     if (_this.checkOdataSap) {
-                        _this.queryOData(transportOrderValue)
+                        return _this.queryOData(transportOrderValue)
                             .then(function (odataResult) {
                             if (!odataResult || odataResult.exists === false) {
                                 // Si la consulta al Odata devuelve que la orden no existe,
                                 // se muestra un mensaje y se inicializan los campos.
                                 alert("Error: La orden de transporte " + transportOrderValue + " no existe en SAP.");
-                                _this.resetWorkItemFields(service);
+                                return _this.resetWorkItemFields(service);
                             }
                             else {
-                                proceedWithODataAndInsert(odataResult.data);
+                                return proceedWithODataAndInsert(odataResult.data);
                             }
                         })
                             .catch(function (err) {
                             // Si no se puede establecer la comunicacion se muestra mensaje de error.
                             alert("Error: No se pudo establecer la comunicación con SAP mediante el servicio OData. Detalle: " + err);
+                            // No relanzamos: el botón debe volver a habilitarse aunque falle la conexión.
                         });
                     }
                     else {
-                        proceedWithODataAndInsert();
+                        return proceedWithODataAndInsert();
                     }
                 });
             });
@@ -158,20 +159,22 @@ define(["require", "exports", "TFS/WorkItemTracking/Services"], function (requir
             if (this.commentsField) {
                 updateData[this.commentsField] = "";
             }
-            service.setFieldValues(updateData).catch(function (err) {
+            return service.setFieldValues(updateData).then(function () { }).catch(function (err) {
                 // fallback in case setFieldValues fails or has typescript interface limitations
+                var fallbacks = [];
                 if (_this.transportOrderField) {
-                    service.setFieldValue(_this.transportOrderField, "");
+                    fallbacks.push(service.setFieldValue(_this.transportOrderField, ""));
                 }
                 if (_this.needSystemDownField) {
-                    service.setFieldValue(_this.needSystemDownField, "");
+                    fallbacks.push(service.setFieldValue(_this.needSystemDownField, ""));
                 }
                 if (_this.needTransactionBlockedField) {
-                    service.setFieldValue(_this.needTransactionBlockedField, "");
+                    fallbacks.push(service.setFieldValue(_this.needTransactionBlockedField, ""));
                 }
                 if (_this.commentsField) {
-                    service.setFieldValue(_this.commentsField, "");
+                    fallbacks.push(service.setFieldValue(_this.commentsField, ""));
                 }
+                return Promise.all(fallbacks).then(function () { });
             });
         };
         Model.prototype.processTransportOrderData = function (service, transportOrderValue, needSystemDownValue, needTransactionBlockedValue, commentsValue, transportOrderDataValue, structureOrderDataStr, odataData) {
@@ -340,7 +343,7 @@ define(["require", "exports", "TFS/WorkItemTracking/Services"], function (requir
             }
             var updatedLines = lineValuesArray.map(function (vals) { return vals.join(";"); });
             var updatedTransportOrderData = updatedLines.join("\n");
-            service.setFieldValue(this.transportOrderDataField, updatedTransportOrderData).then(function () {
+            return service.setFieldValue(this.transportOrderDataField, updatedTransportOrderData).then(function () {
                 alert("Operación completada con éxito. Datos de orden de transporte actualizados.");
             });
         };

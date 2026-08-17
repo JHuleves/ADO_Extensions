@@ -22,17 +22,17 @@ export class WorkitemController {
         let config = VSS.getConfiguration();
         let inputs = config.witInputs || {};
 
-        // Retrieve configuration parameters
-        let buttonText: string = inputs["ButtonText"] || "Insert Transport Order";
-        let transportOrderField: string = inputs["TransportOrderField"] || "";
-        let needSystemDownField: string = inputs["NeedSystemDownField"] || "";
-        let needTransactionBlockedField: string = inputs["NeedTransactionBlockedField"] || "";
-        let commentsField: string = inputs["CommentsField"] || "";
-        let transportOrderDataField: string = inputs["TransportOrderDataField"] || "";
+        // Retrieve configuration parameters (trim para tolerar espacios accidentales al configurarlos)
+        let buttonText: string = (inputs["ButtonText"] || "Insert Transport Order").trim();
+        let transportOrderField: string = (inputs["TransportOrderField"] || "").trim();
+        let needSystemDownField: string = (inputs["NeedSystemDownField"] || "").trim();
+        let needTransactionBlockedField: string = (inputs["NeedTransactionBlockedField"] || "").trim();
+        let commentsField: string = (inputs["CommentsField"] || "").trim();
+        let transportOrderDataField: string = (inputs["TransportOrderDataField"] || "").trim();
         let checkOdataSap: boolean = WorkitemController.parseBoolean(inputs["CheckOdataSap"]);
-        let odataUri: string = inputs["OdataUri"] || "";
-        let sapUser: string = inputs["SapUser"] || "";
-        let sapPassword: string = inputs["SapPassword"] || "";
+        let odataUri: string = (inputs["OdataUri"] || "").trim();
+        let sapUser: string = (inputs["SapUser"] || "").trim();
+        let sapPassword: string = (inputs["SapPassword"] || "").trim();
 
         this.model = new Model(
             buttonText,

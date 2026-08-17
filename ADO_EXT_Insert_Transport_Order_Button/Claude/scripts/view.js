@@ -29,8 +29,20 @@ define(["require", "exports"], function (require, exports) {
             }, function () {
                 $(this).css("background-color", "#0078d4");
             });
+            var originalText = actionButton.text();
             actionButton.click(function () {
-                model.buttonPressed();
+                actionButton.prop("disabled", true);
+                actionButton.css("cursor", "default");
+                actionButton.text(" Procesando... ");
+                // buttonPressed() devuelve una promesa que no se resuelve hasta que
+                // termina todo el trabajo real (incluida la consulta OData si aplica),
+                // así el botón permanece deshabilitado el tiempo que corresponde.
+                var restoreButton = function () {
+                    actionButton.prop("disabled", false);
+                    actionButton.css("cursor", "pointer");
+                    actionButton.text(originalText);
+                };
+                model.buttonPressed().then(restoreButton, restoreButton);
             });
             container.append(actionButton);
             $("body").append(container);

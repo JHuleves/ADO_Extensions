@@ -39,12 +39,12 @@ export class Model {
         this.sapPassword = sapPassword;
     }
 
-    public buttonPressed(): void {
-        this.executeLogic();
+    public buttonPressed(): PromiseLike<void> {
+        return this.executeLogic();
     }
 
-    private executeLogic(): void {
-        WorkItemFormService.getService().then((service) => {
+    private executeLogic(): PromiseLike<void> {
+        return WorkItemFormService.getService().then((service) => {
             let fieldsToRead = [
                 this.transportOrderField,
                 this.needSystemDownField,
@@ -58,7 +58,7 @@ export class Model {
             // Filter out empty or duplicate field names
             fieldsToRead = fieldsToRead.filter((f, idx) => f && f.trim() !== "" && fieldsToRead.indexOf(f) === idx);
 
-            service.getFieldValues(fieldsToRead).then((values) => {
+            return service.getFieldValues(fieldsToRead).then((values) => {
                 let transportOrderValue = (values[this.transportOrderField] || "").toString().trim();
                 let needSystemDownValue = values[this.needSystemDownField];
                 let needTransactionBlockedValue = values[this.needTransactionBlockedField];
@@ -87,8 +87,8 @@ export class Model {
                     return;
                 }
 
-                let proceedWithODataAndInsert = (odataData?: any) => {
-                    this.processTransportOrderData(
+                let proceedWithODataAndInsert = (odataData?: any): PromiseLike<void> => {
+                    return this.processTransportOrderData(
                         service,
                         transportOrderValue,
                         needSystemDownValue,
@@ -102,23 +102,24 @@ export class Model {
 
                 // 4. Si el parametro "Check Odata SAP" esta activo, se realiza la consulta al Odata.
                 if (this.checkOdataSap) {
-                    this.queryOData(transportOrderValue)
+                    return this.queryOData(transportOrderValue)
                         .then((odataResult) => {
                             if (!odataResult || odataResult.exists === false) {
                                 // Si la consulta al Odata devuelve que la orden no existe,
                                 // se muestra un mensaje y se inicializan los campos.
                                 alert("Error: La orden de transporte " + transportOrderValue + " no existe en SAP.");
-                                this.resetWorkItemFields(service);
+                                return this.resetWorkItemFields(service);
                             } else {
-                                proceedWithODataAndInsert(odataResult.data);
+                                return proceedWithODataAndInsert(odataResult.data);
                             }
                         })
                         .catch((err) => {
                             // Si no se puede establecer la comunicacion se muestra mensaje de error.
                             alert("Error: No se pudo establecer la comunicación con SAP mediante el servicio OData. Detalle: " + err);
+                            // No relanzamos: el botón debe volver a habilitarse aunque falle la conexión.
                         });
                 } else {
-                    proceedWithODataAndInsert();
+                    return proceedWithODataAndInsert();
                 }
             });
         });
@@ -187,7 +188,7 @@ export class Model {
         });
     }
 
-    private resetWorkItemFields(service: any): void {
+    private resetWorkItemFields(service: any): PromiseLike<void> {
         let updateData: any = {};
         if (this.transportOrderField) {
             updateData[this.transportOrderField] = "";
@@ -202,20 +203,22 @@ export class Model {
             updateData[this.commentsField] = "";
         }
 
-        service.setFieldValues(updateData).catch((err) => {
+        return service.setFieldValues(updateData).then(() => { /* ok */ }).catch((err) => {
             // fallback in case setFieldValues fails or has typescript interface limitations
+            let fallbacks: Array<Promise<any>> = [];
             if (this.transportOrderField) {
-                service.setFieldValue(this.transportOrderField, "");
+                fallbacks.push(service.setFieldValue(this.transportOrderField, ""));
             }
             if (this.needSystemDownField) {
-                service.setFieldValue(this.needSystemDownField, "");
+                fallbacks.push(service.setFieldValue(this.needSystemDownField, ""));
             }
             if (this.needTransactionBlockedField) {
-                service.setFieldValue(this.needTransactionBlockedField, "");
+                fallbacks.push(service.setFieldValue(this.needTransactionBlockedField, ""));
             }
             if (this.commentsField) {
-                service.setFieldValue(this.commentsField, "");
+                fallbacks.push(service.setFieldValue(this.commentsField, ""));
             }
+            return Promise.all(fallbacks).then(() => { /* ok */ });
         });
     }
 
@@ -228,7 +231,7 @@ export class Model {
         transportOrderDataValue: string,
         structureOrderDataStr: string,
         odataData?: any
-    ): void {
+    ): PromiseLike<void> {
         // If StructureOrderData is empty, use default structure
         if (structureOrderDataStr === "") {
             structureOrderDataStr = "Sequence;TransportOrder;NeedSystemDown;NeedTransactionBlocked;Status;User;Date;Time;Comments";
@@ -388,7 +391,7 @@ export class Model {
         let updatedLines = lineValuesArray.map(vals => vals.join(";"));
         let updatedTransportOrderData = updatedLines.join("\n");
 
-        service.setFieldValue(this.transportOrderDataField, updatedTransportOrderData).then(() => {
+        return service.setFieldValue(this.transportOrderDataField, updatedTransportOrderData).then(() => {
             alert("Operación completada con éxito. Datos de orden de transporte actualizados.");
         });
     }

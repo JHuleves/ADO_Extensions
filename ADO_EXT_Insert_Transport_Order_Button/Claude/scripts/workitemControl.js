@@ -6,17 +6,17 @@ define(["require", "exports", "./model", "./view"], function (require, exports, 
         function WorkitemController() {
             var config = VSS.getConfiguration();
             var inputs = config.witInputs || {};
-            // Retrieve configuration parameters
-            var buttonText = inputs["ButtonText"] || "Insert Transport Order";
-            var transportOrderField = inputs["TransportOrderField"] || "";
-            var needSystemDownField = inputs["NeedSystemDownField"] || "";
-            var needTransactionBlockedField = inputs["NeedTransactionBlockedField"] || "";
-            var commentsField = inputs["CommentsField"] || "";
-            var transportOrderDataField = inputs["TransportOrderDataField"] || "";
+            // Retrieve configuration parameters (trim para tolerar espacios accidentales al configurarlos)
+            var buttonText = (inputs["ButtonText"] || "Insert Transport Order").trim();
+            var transportOrderField = (inputs["TransportOrderField"] || "").trim();
+            var needSystemDownField = (inputs["NeedSystemDownField"] || "").trim();
+            var needTransactionBlockedField = (inputs["NeedTransactionBlockedField"] || "").trim();
+            var commentsField = (inputs["CommentsField"] || "").trim();
+            var transportOrderDataField = (inputs["TransportOrderDataField"] || "").trim();
             var checkOdataSap = WorkitemController.parseBoolean(inputs["CheckOdataSap"]);
-            var odataUri = inputs["OdataUri"] || "";
-            var sapUser = inputs["SapUser"] || "";
-            var sapPassword = inputs["SapPassword"] || "";
+            var odataUri = (inputs["OdataUri"] || "").trim();
+            var sapUser = (inputs["SapUser"] || "").trim();
+            var sapPassword = (inputs["SapPassword"] || "").trim();
             this.model = new model_1.Model(buttonText, transportOrderField, needSystemDownField, needTransactionBlockedField, commentsField, transportOrderDataField, checkOdataSap, odataUri, sapUser, sapPassword);
             this.view = new view_1.View(this.model);
             VSS.resize();
