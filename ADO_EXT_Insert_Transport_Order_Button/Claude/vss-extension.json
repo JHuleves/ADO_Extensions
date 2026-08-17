@@ -1,0 +1,203 @@
+{
+    "manifestVersion": 1,
+    "id": "insert_sap_ot_button",
+    "name": "Insert Transport Order Button",
+    "version": "1.0.4",
+    "publisher": "JHuelves",
+    "description": "Botón para el formulario de work item que valida, concatena y opcionalmente verifica contra SAP (OData ZBC_OD_TRANSPORT_ORDER_STATUS) los datos de una orden de transporte.",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "categories": [
+        "Azure Boards"
+    ],
+    "tags": [
+        "work item",
+        "transport order",
+        "SAP",
+        "OData",
+        "button"
+    ],
+    "icons": {
+        "default": "img/logo.png"
+    },
+    "content": {
+        "details": {
+            "path": "details.md"
+        },
+        "license": {
+            "path": "LICENSE.md"
+        },
+        "privacy": {
+            "path": "PRIVACY.md"
+        }
+    },
+    "contributions": [
+        {
+            "id": "insert-transport-order-button-control",
+            "type": "ms.vss-work-web.work-item-form-control",
+            "description": "Botón que valida e inserta/actualiza la orden de transporte en el work item, opcionalmente verificando contra SAP.",
+            "targets": [
+                "ms.vss-work-web.work-item-form"
+            ],
+            "properties": {
+                "name": "insert-transport-order-button",
+                "uri": "index.html",
+                "height": 60,
+                "inputs": [
+                    {
+                        "id": "ButtonText",
+                        "name": "Button text",
+                        "description": "Texto que se mostrará en el botón.",
+                        "type": "string",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "TransportOrderField",
+                        "name": "Transport Order field",
+                        "description": "Campo del work item que contiene la orden de transporte (debe tener 10 caracteres).",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": ["String", "PlainText"]
+                        },
+                        "validation": {
+                            "dataType": "Field",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "NeedSystemDownField",
+                        "name": "Need System Down field",
+                        "description": "Campo del work item usado como flag de 'Need System Down'.",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": ["Boolean", "String", "PicklistString"]
+                        },
+                        "validation": {
+                            "dataType": "Field",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "NeedTransactionBlockedField",
+                        "name": "Need Transaction Blocked field",
+                        "description": "Campo del work item usado como flag de 'Need Transaction Blocked'.",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": ["Boolean", "String", "PicklistString"]
+                        },
+                        "validation": {
+                            "dataType": "Field",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "CommentsField",
+                        "name": "Comments field",
+                        "description": "Campo del work item que contiene los comentarios (no puede contener ';').",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": ["String", "PlainText", "HTML"]
+                        },
+                        "validation": {
+                            "dataType": "Field",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "TransportOrderDataField",
+                        "name": "Transport Order Data field",
+                        "description": "Campo del work item destino de la concatenación de líneas de órdenes de transporte.",
+                        "type": "WorkItemField",
+                        "properties": {
+                            "workItemFieldTypes": ["String", "PlainText", "HTML"]
+                        },
+                        "validation": {
+                            "dataType": "Field",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "CheckOdataSap",
+                        "name": "Check OData SAP",
+                        "description": "Si está activo, se verifica la orden de transporte contra SAP mediante el OData ZBC_OD_TRANSPORT_ORDER_STATUS.",
+                        "type": "boolean",
+                        "validation": {
+                            "dataType": "Boolean",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "OdataUri",
+                        "name": "OData URI",
+                        "description": "URI base del servicio OData de SAP (obligatorio).",
+                        "type": "string",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": true
+                        }
+                    },
+                    {
+                        "id": "SapUser",
+                        "name": "SAP user",
+                        "description": "Usuario SAP para la conexión OData.",
+                        "type": "string",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    },
+                    {
+                        "id": "SapPassword",
+                        "name": "SAP password",
+                        "description": "Password SAP para la conexión OData.",
+                        "type": "string",
+                        "validation": {
+                            "dataType": "String",
+                            "isRequired": false
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "index.html",
+            "addressable": true
+        },
+        {
+            "path": "scripts/app.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/model.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/view.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/VSS.SDK.min.js",
+            "addressable": true
+        },
+        {
+            "path": "scripts/workitemControl.js",
+            "addressable": true
+        },
+        {
+            "path": "styles/style.css",
+            "addressable": true
+        },
+        {
+            "path": "img/logo.png",
+            "addressable": true
+        }
+    ]
+}
