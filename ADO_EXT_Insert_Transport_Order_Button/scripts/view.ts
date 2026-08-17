@@ -1,3 +1,5 @@
+/// <reference types="vss-web-extension-sdk" />
+
 import { Model } from "./model";
 
 export class View {
@@ -5,31 +7,28 @@ export class View {
 
     constructor(model: Model) {
         this.container = $("<div />");
-        let container = this.container;
-        container.addClass("container");
-        container.addClass("wrap");
+        this.container.addClass("container wrap");
 
-        let actionButton = $("<button />");
+        const actionButton = $("<button />");
         actionButton.addClass("buttons");
         actionButton.text(" " + model.buttonText + " ");
 
-        // Beautiful standard styling for the button
+        // Styling: Blue, beautiful professional Microsoft theme or standard yellow
+        // Let's use a nice, modern Microsoft blue button
         actionButton.css({
-            "background-color": "#0078d4", // Microsoft core blue color
-            "color": "white",
-            "border": "1px solid #0078d4",
-            "padding": "6px 16px",
-            "cursor": "pointer",
-            "font-size": "14px",
-            "font-weight": "400",
-            "border-radius": "2px",
-            "min-width": "120px"
+            "background-color": "#0078d4",
+            "color":            "white",
+            "font-weight":      "normal",
+            "border":           "1px solid #0078d4",
+            "padding":          "6px 16px",
+            "border-radius":    "2px",
+            "cursor":           "pointer",
+            "font-size":        "14px"
         });
 
-        // Hover effect to make it look responsive
         actionButton.hover(
             function() {
-                $(this).css("background-color", "#106ebe"); // darker blue
+                $(this).css("background-color", "#106ebe");
             },
             function() {
                 $(this).css("background-color", "#0078d4");
@@ -37,11 +36,19 @@ export class View {
         );
 
         actionButton.click(() => {
-            model.buttonPressed();
+            actionButton.prop("disabled", true);
+            const originalText = actionButton.text();
+            actionButton.text(" Procesando... ");
+            
+            setTimeout(() => {
+                model.buttonPressed();
+                actionButton.prop("disabled", false);
+                actionButton.text(originalText);
+            }, 100);
         });
 
-        container.append(actionButton);
-        $("body").append(container);
+        this.container.append(actionButton);
+        $("body").append(this.container);
         VSS.resize();
     }
 

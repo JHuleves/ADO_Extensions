@@ -1,4 +1,3 @@
-// Test file to verify transport order parsing and concatenation logic
 const assert = require("assert");
 
 function formatFlagValue(val) {
@@ -160,10 +159,8 @@ function processTransportOrderData(
     return updatedLines.join("\n");
 }
 
-// ---------------------- RUN TESTS ----------------------
 console.log("Running logic unit tests...");
 
-// Test Case 1: Insert when empty
 let result1 = processTransportOrderData(
     "TR10000000",
     true,
@@ -177,7 +174,6 @@ let result1 = processTransportOrderData(
 console.log("Result 1:\n" + result1);
 assert.strictEqual(result1, "0001;TR10000000;X;;Released;SAP_USER;20260721;123000;My comment");
 
-// Test Case 2: Update existing line
 let initialData2 = "0001;TR10000000;;;Created;DEV_USER;20260720;100000;Old comment";
 let result2 = processTransportOrderData(
     "TR10000000",
@@ -192,7 +188,6 @@ let result2 = processTransportOrderData(
 console.log("Result 2:\n" + result2);
 assert.strictEqual(result2, "0001;TR10000000;X;X;Released;SAP_USER;20260721;123000;Updated comment");
 
-// Test Case 3: Add second line with correct sequence padding
 let initialData3 = "0001;TR10000000;X;;Released;SAP_USER;20260721;123000;My comment";
 let result3 = processTransportOrderData(
     "TR20000000",
@@ -207,7 +202,6 @@ let result3 = processTransportOrderData(
 console.log("Result 3:\n" + result3);
 assert.strictEqual(result3, "0001;TR10000000;X;;Released;SAP_USER;20260721;123000;My comment\n0002;TR20000000;;X;Modifiable;DEV2;20260722;091500;Second comment");
 
-// Test Case 4: No Odata Check
 let result4 = processTransportOrderData(
     "TR30000000",
     true,

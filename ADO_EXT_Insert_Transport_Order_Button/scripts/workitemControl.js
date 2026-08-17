@@ -1,4 +1,4 @@
-define(["require", "exports", "./model", "./view"], function (require, exports, model_1, view_1) {
+define(["require", "exports", "./model", "./view", "TFS/WorkItemTracking/Services"], function (require, exports, model_1, view_1, Services_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var WorkitemController = (function () {
@@ -6,21 +6,26 @@ define(["require", "exports", "./model", "./view"], function (require, exports, 
             var config = VSS.getConfiguration();
             var inputs = config.witInputs || {};
             var buttonText = inputs["ButtonText"] || "Insert Transport Order";
-            var transportOrderField = inputs["TransportOrderField"] || "";
-            var needSystemDownField = inputs["NeedSystemDownField"] || "";
-            var needTransactionBlockedField = inputs["NeedTransactionBlockedField"] || "";
-            var commentsField = inputs["CommentsField"] || "";
-            var transportOrderDataField = inputs["TransportOrderDataField"] || "";
+            var transportOrderField = (inputs["TransportOrderField"] || "").trim();
+            var needSystemDownField = (inputs["NeedSystemDownField"] || "").trim();
+            var needTransactionBlockedField = (inputs["NeedTransactionBlockedField"] || "").trim();
+            var commentsField = (inputs["CommentsField"] || "").trim();
+            var transportOrderDataField = (inputs["TransportOrderDataField"] || "").trim();
             var checkOdataSap = inputs["CheckOdataSap"] ? true : false;
-            var odataUri = inputs["OdataUri"] || "";
-            var sapUser = inputs["SapUser"] || "";
-            var sapPassword = inputs["SapPassword"] || "";
-            this.model = new model_1.Model(buttonText, transportOrderField, needSystemDownField, needTransactionBlockedField, commentsField, transportOrderDataField, checkOdataSap, odataUri, sapUser, sapPassword);
-            this.view = new view_1.View(this.model);
+            var odataUri = (inputs["OdataUri"] || "").trim();
+            var sapUser = (inputs["SapUser"] || "").trim();
+            var sapPassword = (inputs["SapPassword"] || "").trim();
+            var model = new model_1.Model(buttonText, transportOrderField, needSystemDownField, needTransactionBlockedField, commentsField, transportOrderDataField, checkOdataSap, odataUri, sapUser, sapPassword);
+            this.view = new view_1.View(model);
             VSS.resize();
         }
         WorkitemController.prototype.update = function () {
-            this.view.setVisible(true);
+            var _this = this;
+            Services_1.WorkItemFormService.getService().then(function (service) {
+                service.getFieldValues(["System.WorkItemType"]).then(function (_fields) {
+                    _this.view.setVisible(true);
+                });
+            });
         };
         return WorkitemController;
     }());

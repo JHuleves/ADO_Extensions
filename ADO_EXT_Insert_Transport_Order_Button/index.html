@@ -1,29 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" style="height:100%">
-
+<html lang="es" style="height:100%">
 <head>
     <meta charset="utf-8" />
+    <title>Time Sheet Entry</title>
+
+    <!-- VSS SDK (legacy AMD) -->
     <script src="scripts/VSS.SDK.min.js"></script>
-    <title>Action Button Control</title>
+
+    <!-- Observer – se carga ANTES de VSS.init() -->
+    <script src="scripts/observer.js"></script>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="styles/style.css" type="text/css" />
+
+    <script>
+        // ── Instancia global del Observer ─────────────────────────────────
+        // El flag 'render' se puede sobreescribir desde workitemControl.ts
+        // una vez que se lee el parámetro "Log" de la configuración.
+        var observer = new ExtensionObserver({
+            render: true,   // se ajusta dinámicamente al leer config
+
+            workItem: {
+                requiredFields: [],  // Los campos reales vienen de la config (inputs del manifest).
+                                     // Se rellenan en attach() si hace falta, por ahora solo
+                                     // verificamos SDK y jQuery en init().
+                allowedTypes: []
+            }
+        });
+
+        // Verificaciones de carga (SDK, jQuery)
+        observer.init();
+    </script>
+
+    <script>
+        VSS.init({
+            explicitNotifyLoaded: true,
+            usePlatformScripts:   true,
+            usePlatformStyles:    true,
+            configureModuleLoader: true,
+            applyTheme: true
+        });
+
+        VSS.require(["scripts/app"], function () {
+            // Verificaciones de campos tras VSS.ready
+            observer.attach();
+            VSS.notifyLoadSucceeded();
+        });
+
+        VSS.resize();
+    </script>
 </head>
-
 <body style="height:100%">
-
 </body>
-<script>
-    VSS.init({
-        explicitNotifyLoaded: true,
-        usePlatformScripts: true,
-        usePlatformStyles: true,
-        configureModuleLoader: true,
-        applyTheme: true
-    });
-
-    VSS.require(["scripts/app"], function() {
-        VSS.notifyLoadSucceeded();
-    });
-    VSS.resize();
-</script>
-
 </html>

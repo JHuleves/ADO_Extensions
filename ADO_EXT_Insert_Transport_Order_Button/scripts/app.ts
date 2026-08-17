@@ -1,27 +1,32 @@
+/// <reference types="vss-web-extension-sdk" />
+
 import { WorkitemController } from "./workitemControl";
 import { IWorkItemLoadedArgs } from "TFS/WorkItemTracking/ExtensionContracts";
-import { WorkItemFormService } from "TFS/WorkItemTracking/Services"; 
+import { WorkItemFormService } from "TFS/WorkItemTracking/Services";
 
-// save on ctr + s
+// ── Ctrl+S → guardar el work item ────────────────────────────────────────────
 $(window).bind("keydown", function (event: JQueryEventObject) {
     if (event.ctrlKey || event.metaKey) {
-        if (String.fromCharCode(event.which) === "S") {
+        if (String.fromCharCode(event.which).toUpperCase() === "S") {
             event.preventDefault();
-            WorkItemFormService.getService().then((service) => service.beginSaveWorkItem($.noop, $.noop));
+            WorkItemFormService.getService().then((service) =>
+                service.beginSaveWorkItem($.noop, $.noop)
+            );
         }
     }
 });
 
+// ── Proveedor del control ─────────────────────────────────────────────────────
 var control: WorkitemController;
 
 var provider = () => {
     return {
-        onLoaded: (workItemLoadedArgs: IWorkItemLoadedArgs) => {
+        onLoaded: (_workItemLoadedArgs: IWorkItemLoadedArgs) => {
             control = new WorkitemController();
             control.update();
-            VSS.resize(); 
+            VSS.resize();
         },
-        onFieldChanged: (args) => {
+        onFieldChanged: (_args: any) => {
             if (control) {
                 control.update();
             }

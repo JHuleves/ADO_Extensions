@@ -1,3 +1,5 @@
+/// <reference types="vss-web-extension-sdk" />
+
 import { WorkItemFormService } from "TFS/WorkItemTracking/Services";
 
 export class Model {
@@ -51,7 +53,7 @@ export class Model {
                 "StructureOrderData",
                 "Custom.StructureOrderData"
             ];
-            
+
             // Filter out empty or duplicate field names
             fieldsToRead = fieldsToRead.filter((f, idx) => f && f.trim() !== "" && fieldsToRead.indexOf(f) === idx);
 
@@ -65,19 +67,19 @@ export class Model {
                 let structureOrderDataValue = values["StructureOrderData"] || values["Custom.StructureOrderData"] || "";
                 let structureOrderDataStr = structureOrderDataValue.toString().trim();
 
-                // 1. Si el campo indicado como "Transport Order" esta vacio, no se realiza ninguna accion.
+                // 1. Si el campo indicado como "Transport Order" está vacío, no se realiza ninguna acción.
                 if (transportOrderValue === "") {
                     return;
                 }
 
                 // 2. Si el contenido del campo indicado como "Transport Order" no es de 10 caracteres,
-                // se da un mensaje de error indicando que el tamaño es incorrecto
+                // se da un mensaje de error indicando que el tamaño es incorrecto.
                 if (transportOrderValue.length !== 10) {
                     alert("Error: El tamaño del campo Transport Order es incorrecto. Debe tener exactamente 10 caracteres.");
                     return;
                 }
 
-                // 3. Revisar si el contenido del campo indicado como "Comments" contiene algun ";",
+                // 3. Revisar si el contenido del campo indicado como "Comments" contiene algún ";",
                 // en cuyo caso, mostraremos un error indicando que no se permite su uso.
                 if (commentsValue.indexOf(";") !== -1) {
                     alert("Error: El campo de comentarios no puede contener el carácter ';' (punto y coma).");
@@ -97,7 +99,7 @@ export class Model {
                     );
                 };
 
-                // 4. Si el parametro "Check Odata SAP" esta activo, se realiza la consulta al Odata.
+                // 4. Si el parámetro "Check Odata SAP" está activo, se realiza la consulta al Odata.
                 if (this.checkOdataSap) {
                     this.queryOData(transportOrderValue)
                         .then((odataResult) => {
@@ -111,7 +113,7 @@ export class Model {
                             }
                         })
                         .catch((err) => {
-                            // Si no se puede establecer la comunicacion se muestra mensaje de error.
+                            // Si no se puede establecer la comunicación se muestra mensaje de error.
                             alert("Error: No se pudo establecer la comunicación con SAP mediante el servicio OData. Detalle: " + err);
                         });
                 } else {
@@ -133,7 +135,7 @@ export class Model {
                 odataUrl = odataUrl.slice(0, -1);
             }
 
-            // Standard OData query for a single entity by key
+            // Consulta OData por clave
             let queryUrl = odataUrl + "('" + transportOrder + "')";
             if (queryUrl.indexOf("?") === -1) {
                 queryUrl += "?$format=json";
@@ -193,7 +195,7 @@ export class Model {
         }
 
         service.setFieldValues(updateData).catch((err) => {
-            // fallback in case setFieldValues fails or has typescript interface limitations
+            // fallback si setFieldValues falla
             if (this.transportOrderField) {
                 service.setFieldValue(this.transportOrderField, "");
             }
@@ -219,21 +221,19 @@ export class Model {
         structureOrderDataStr: string,
         odataData?: any
     ): void {
-        // If StructureOrderData is empty, use default structure
         if (structureOrderDataStr === "") {
             structureOrderDataStr = "Sequence;TransportOrder;NeedSystemDown;NeedTransactionBlocked;Status;User;Date;Time;Comments";
         }
 
         let columns = structureOrderDataStr.split(";").map(c => c.trim());
 
-        // Find index of standard columns
         let seqIndex = -1;
         let toIndex = -1;
         let sdIndex = -1;
         let tbIndex = -1;
         let commentsIndex = -1;
 
-        // Exact match
+        // Búsqueda exacta de las columnas
         for (let i = 0; i < columns.length; i++) {
             let col = columns[i].toLowerCase();
             if (col === "sequence" || col === "seq" || col === "secuencia") {
@@ -249,7 +249,7 @@ export class Model {
             }
         }
 
-        // Substring fallback
+        // Búsqueda parcial si no hay coincidencia exacta
         for (let i = 0; i < columns.length; i++) {
             let col = columns[i].toLowerCase();
             if (seqIndex === -1 && col.indexOf("seq") !== -1) seqIndex = i;
@@ -259,11 +259,9 @@ export class Model {
             if (commentsIndex === -1 && col.indexOf("comment") !== -1) commentsIndex = i;
         }
 
-        // Defaults if completely missing
         if (seqIndex === -1) seqIndex = 0;
         if (toIndex === -1) toIndex = 1;
 
-        // Parse lines
         let lines = transportOrderDataValue.split(/\r?\n/).map(l => l.trim()).filter(l => l !== "");
         let lineValuesArray: Array<Array<string>> = [];
         let existingLineIndex = -1;
@@ -280,7 +278,6 @@ export class Model {
             }
         }
 
-        // Format flags: active is "X", inactive is ""
         let formatFlagValue = (val: any): string => {
             if (!val) return "";
             let s = val.toString().toLowerCase().trim();
@@ -293,7 +290,6 @@ export class Model {
         let systemDownFlag = formatFlagValue(needSystemDownValue);
         let transactionBlockedFlag = formatFlagValue(needTransactionBlockedValue);
 
-        // Helper to retrieve case-insensitive property value from OData JSON
         let getODataValue = (colName: string): string => {
             if (!odataData) return "";
             let searchKey = colName.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -310,14 +306,13 @@ export class Model {
         };
 
         if (existingLineIndex !== -1) {
-            // Update existing line
+            // Actualizar línea existente
             let existingVals = lineValuesArray[existingLineIndex];
             existingVals[toIndex] = transportOrderValue;
             if (sdIndex !== -1) existingVals[sdIndex] = systemDownFlag;
             if (tbIndex !== -1) existingVals[tbIndex] = transactionBlockedFlag;
             if (commentsIndex !== -1) existingVals[commentsIndex] = commentsValue;
 
-            // Fill or update other columns with OData values if available
             for (let j = 0; j < columns.length; j++) {
                 if (j !== seqIndex && j !== toIndex && j !== sdIndex && j !== tbIndex && j !== commentsIndex) {
                     if (this.checkOdataSap && odataData) {
@@ -326,9 +321,9 @@ export class Model {
                 }
             }
         } else {
-            // Add new line
+            // Añadir nueva línea
             let nextSeqNum = 1;
-            let seqFormatLength = 4; // default padding like "0001"
+            let seqFormatLength = 4;
 
             if (lineValuesArray.length > 0) {
                 let maxSeq = 0;

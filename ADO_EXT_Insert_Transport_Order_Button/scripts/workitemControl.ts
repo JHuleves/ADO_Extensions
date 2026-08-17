@@ -1,27 +1,28 @@
+/// <reference types="vss-web-extension-sdk" />
+
 import { Model } from "./model";
-import { View } from "./view";
+import { View }  from "./view";
+import { WorkItemFormService } from "TFS/WorkItemTracking/Services";
 
 export class WorkitemController {
     private view: View;
-    private model: Model;
 
     constructor() {
-        let config = VSS.getConfiguration();
-        let inputs = config.witInputs || {};
+        const config = VSS.getConfiguration();
+        const inputs: IDictionaryStringTo<string> = config.witInputs || {};
 
-        // Retrieve configuration parameters
-        let buttonText: string = inputs["ButtonText"] || "Insert Transport Order";
-        let transportOrderField: string = inputs["TransportOrderField"] || "";
-        let needSystemDownField: string = inputs["NeedSystemDownField"] || "";
-        let needTransactionBlockedField: string = inputs["NeedTransactionBlockedField"] || "";
-        let commentsField: string = inputs["CommentsField"] || "";
-        let transportOrderDataField: string = inputs["TransportOrderDataField"] || "";
-        let checkOdataSap: boolean = inputs["CheckOdataSap"] ? true : false;
-        let odataUri: string = inputs["OdataUri"] || "";
-        let sapUser: string = inputs["SapUser"] || "";
-        let sapPassword: string = inputs["SapPassword"] || "";
+        const buttonText:                  string  = inputs["ButtonText"] || "Insert Transport Order";
+        const transportOrderField:         string  = (inputs["TransportOrderField"] || "").trim();
+        const needSystemDownField:         string  = (inputs["NeedSystemDownField"] || "").trim();
+        const needTransactionBlockedField: string  = (inputs["NeedTransactionBlockedField"] || "").trim();
+        const commentsField:               string  = (inputs["CommentsField"] || "").trim();
+        const transportOrderDataField:     string  = (inputs["TransportOrderDataField"] || "").trim();
+        const checkOdataSap:               boolean = inputs["CheckOdataSap"] ? true : false;
+        const odataUri:                    string  = (inputs["OdataUri"] || "").trim();
+        const sapUser:                     string  = (inputs["SapUser"] || "").trim();
+        const sapPassword:                 string  = (inputs["SapPassword"] || "").trim();
 
-        this.model = new Model(
+        const model  = new Model(
             buttonText,
             transportOrderField,
             needSystemDownField,
@@ -33,12 +34,15 @@ export class WorkitemController {
             sapUser,
             sapPassword
         );
-        
-        this.view = new View(this.model);
+        this.view = new View(model);
         VSS.resize();
     }
 
     public update(): void {
-        this.view.setVisible(true);
+        WorkItemFormService.getService().then((service) => {
+            service.getFieldValues(["System.WorkItemType"]).then((_fields) => {
+                this.view.setVisible(true);
+            });
+        });
     }
 }
