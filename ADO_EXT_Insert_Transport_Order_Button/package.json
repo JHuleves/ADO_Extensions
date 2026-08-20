@@ -1,25 +1,26 @@
 {
-  "name": "insert-transport-order-button",
-  "version": "1.0.0",
-  "description": "Azure DevOps Extension – Insert Transport Order Button",
-  "private": true,
-  "scripts": {
-    "build": "grunt build",
-    "package-dev": "grunt package-dev",
-    "package-release": "grunt package-release"
-  },
-  "devDependencies": {
-    "@types/jquery": "^2.0.54",
-    "@types/q": "0.0.32",
-    "@types/requirejs": "^2.1.28",
-    "grunt": "~1.0.1",
-    "grunt-cli": "^1.2.0",
-    "grunt-contrib-clean": "^1.0.0",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-exec": "^1.0.1",
-    "grunt-ts": "^6.0.0-beta.3",
-    "tfx-cli": "^0.16.0",
-    "typescript": "^2.9.2",
-    "vss-web-extension-sdk": "^5.141.0"
-  }
+    "name": "insert-sap-ot-button",
+    "version": "1.0.15",
+    "description": "Azure DevOps Extension \u2013 Insert Transport Order Button",
+    "private": false,
+    "scripts": {
+        "build": "grunt build",
+        "package-dev": "grunt package-dev",
+        "package-release": "grunt package-release"
+    },
+    "devDependencies": {
+        "@types/jquery": "^2.0.54",
+        "@types/q": "0.0.32",
+        "@types/requirejs": "^2.1.28",
+        "grunt": "~1.0.1",
+        "grunt-cli": "^1.2.0",
+        "grunt-contrib-clean": "^1.0.0",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-exec": "^1.0.1",
+        "grunt-ts": "^6.0.0-beta.3",
+        "tfx-cli": "^0.16.0",
+        "typescript": "^2.9.2",
+        "vss-web-extension-sdk": "^5.141.0"
+    },
+    "publisher": "JHuelves"
 }

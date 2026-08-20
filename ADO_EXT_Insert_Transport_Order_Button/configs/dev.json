@@ -1,6 +1,6 @@
 {
-    "id":        "insert_sap_OT_button-dev",
+    "id":        "insert-sap-ot-button-dev",
     "name":      "Insert Transport Order Button (DEV)",
     "publisher": "JHuelves",
-    "public":    false
+    "public":    true
 }
